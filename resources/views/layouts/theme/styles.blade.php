@@ -6,17 +6,17 @@
 <link href="{{ asset('assets/css/structure.css') }}" rel="stylesheet" type="text/css" class="structure" />
 <!-- END GLOBAL MANDATORY STYLES -->
 
-<link href="{{ asset('plugins/fonts-icons/fontawesome/css/fontawesome.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('plugins/font-icons/fontawesome/css/all.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('plugins/font-icons/fontawesome/css/fontawesome.css') }}" rel="stylesheet" type="text/css">
 
 <link href="{{ asset('assets/css/elements/avatar.css') }}" rel="stylesheet" type="text/css">
 
-<link href="{{ asset('pluggins/sweetalerts/sweetalerts.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('pluggins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('plugins/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('plugins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet" type="text/css">
 
 <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
 
-<link href="{{ asset('assets/css/widgets/module-widgets.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('assets/css/widgets/modules-widgets.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}" rel="stylesheet" type="text/css">
 
 <style>
