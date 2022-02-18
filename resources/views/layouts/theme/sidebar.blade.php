@@ -141,8 +141,8 @@
             </li>
         </ul>
     </nav>
-    <div id="compact_submenuSidebar" class="submenu-sidebar">
-        <!--<div class="submenu" id="dashboard">
+    <!--<div id="compact_submenuSidebar" class="submenu-sidebar">
+        <div class="submenu" id="dashboard">
             <ul class="submenu-list" data-parent-element="#dashboard"> 
                 <li>
                     <a href="index.html">
@@ -164,6 +164,6 @@
                     </a>
                 </li>
             </ul>
-        </div>-->
-    </div>
+        </div>
+    </div>-->
 </div>
