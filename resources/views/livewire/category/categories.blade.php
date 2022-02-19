@@ -43,8 +43,7 @@
             </div>
         </div>
     </div>
-    Inclu
-de form
+    @include('livewire.category.form');
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function(){
