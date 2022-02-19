@@ -12,7 +12,7 @@
                     </li>
                 </ul>
             </div>
-            Search
+            @include('common.searchBox');
             <div class="widget-content">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mt-1">
@@ -38,7 +38,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    Pagination
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>

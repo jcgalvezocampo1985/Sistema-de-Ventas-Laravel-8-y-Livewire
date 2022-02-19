@@ -21,7 +21,7 @@ class CategoriesComponent extends Component
     public $selected_id;
     public $pageTitle;
     public $componentName;
-    private $pagination = 5;
+    private $pagination = 2;
 
     public function mount()
     {
@@ -29,9 +29,19 @@ class CategoriesComponent extends Component
         $this->componentName = 'Categorías';
     }
 
+    public function paginationView()
+    {
+        return 'vendor.livewire.bootstrap';
+    }
+
     public function render()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'DESC')->paginate($this->pagination);
+
+        if(strlen($this->search) > 0)
+        {
+            $categories = Category::where('name', 'LIKE', '%'.$this->search.'%')->paginate($this->pagination);
+        }
 
         return view('livewire.category.categories', compact('categories'))
                 ->extends('layouts.theme.app')
