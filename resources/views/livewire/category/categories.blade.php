@@ -49,7 +49,7 @@
     document.addEventListener('DOMContentLoaded', function(){
         window.livewire.on('category-added', msg => {
             $('#theModal').modal('hide');
-            noty(msg)
+            //noty(msg)
         });
         window.livewire.on('category-updated', msg => {
             $('#theModal').modal('hide');
