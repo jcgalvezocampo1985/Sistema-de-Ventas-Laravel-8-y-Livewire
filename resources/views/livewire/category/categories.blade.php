@@ -29,7 +29,7 @@
                                 <td>
                                     <h6>{{ $category->name }}</h6>
                                 </td>
-                                <td class="text-center"><span><img src="{{ asset('storage/categories/'.$category->image) }}" alt="Imagen de ejemplo" height="70" width="80" class="rounded" /></span></td>
+                                <td class="text-center"><span><img src="{{ asset('storage/categories/'.$category->image) }}" alt="Imagen de ejemplo" height="50" width="60" class="rounded" /></span></td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})" class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
                                     <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>

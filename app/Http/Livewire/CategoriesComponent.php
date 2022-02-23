@@ -21,7 +21,7 @@ class CategoriesComponent extends Component
     public $selected_id;
     public $pageTitle;
     public $componentName;
-    private $pagination = 2;
+    private $pagination = 5;
 
     public function mount()
     {
@@ -87,6 +87,45 @@ class CategoriesComponent extends Component
 
         $this->resetUI();
         $this->emit('category-added', 'Categoría registrada');
+    }
+
+    public function Update()
+    {
+        $rules = [
+            'name' => "required|min:3|unique:categories,name,{$this->selected_id}"
+        ];
+
+        $messages = [
+            'name.required' => 'Requerido',
+            'name.min' => 'Debe contener mínimo 3 carácteres',
+            'name.unique' => 'Ya existe la categoría'
+        ];
+
+        $this->validate($rules, $messages);
+
+        $category = Category::find($this->selected_id);
+        $category->update(['name' => $this->name]);
+
+        if($this->image)
+        {
+            $customFileName = uniqid().'_.'.$this->image->extension();
+            $this->image->storeAs('public/categories', $customFileName);
+            $imageName = $category->image;
+
+            $category->image = $customFileName;
+            $category->save();
+
+            if($imageName != "")
+            {
+                if(file_exists('storage/categories/'.$imageName))
+                {
+                    unlink('storage/categories/'.$imageName);
+                }
+            }
+
+            $this->resetUI();
+            $this->emit('category-updated', 'Categoría actualizada');
+        }
     }
 
     public function resetUI()
