@@ -32,7 +32,7 @@
                                 <td class="text-center"><span><img src="{{ asset('storage/categories/'.$category->image) }}" alt="Imagen de ejemplo" height="50" width="60" class="rounded" /></span></td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})" class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
+                                    <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}','{{ $category->products->count() }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -69,8 +69,17 @@
         });
     });
 
-    function Confirm(id)
+    function Confirm(id, products)
     {
+        if(products > 0)
+        {
+            Swal.fire({
+                icon: 'error',
+                title: '¡¡Aviso!!',
+                text: '¡No se puede eliminar la categoria porque tiene productos relacionados!'
+            })
+            return;
+        }
         swal({
             title: 'Confirmar',
             text: '¿Deseas eliminar el registro?',
