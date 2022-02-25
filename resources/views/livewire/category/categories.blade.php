@@ -49,7 +49,7 @@
     document.addEventListener('DOMContentLoaded', function(){
         window.livewire.on('category-added', msg => {
             $('#theModal').modal('hide');
-            //noty(msg)
+            noty(msg)
         });
         window.livewire.on('category-updated', msg => {
             $('#theModal').modal('hide');
@@ -69,21 +69,22 @@
         });
     });
 
-    let confirm = (id) =>{
+    function Confirm(id)
+    {
         swal({
             title: 'Confirmar',
-            text: '¿Desea eliminar el registro?',
+            text: '¿Deseas eliminar el registro?',
             type: 'warning',
             showCancelButton: true,
             cancelButtonText: 'Cerrar',
             cancelButtonColor: '#fff',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#3b3f5c',
-        }).then((result) =>{
+        }).then(function(result){
             if(result.value){
                 window.livewire.emit('deleteRow', id);
                 swal.close();
             }
-        });
+        })
     }
 </script>

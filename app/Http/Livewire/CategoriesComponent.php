@@ -23,6 +23,10 @@ class CategoriesComponent extends Component
     public $componentName;
     private $pagination = 5;
 
+    protected $listeners = [
+        'deleteRow' => 'Destroy'
+    ];
+
     public function mount()
     {
         $this->pageTitle = 'Listado';
@@ -134,5 +138,20 @@ class CategoriesComponent extends Component
         $this->image = null;
         $this->search = '';
         $this->selected_id = 0;
+    }
+
+    public function Destroy(Category $category)
+    {
+        //$category = Category::find($id);
+        $imageName = $category->image;//Imagen temporal
+        $category->delete();
+
+        if($imageName != null)
+        {
+            unlink('storage/categories/'.$imageName);
+        }
+
+        $this->resetUI();
+        $this->emit('category-deleted', 'Categoría eliminada');
     }
 }
