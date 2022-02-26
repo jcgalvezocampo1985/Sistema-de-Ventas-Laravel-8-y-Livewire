@@ -29,7 +29,7 @@
                                 <td>
                                     <h6>{{ $category->name }}</h6>
                                 </td>
-                                <td class="text-center"><span><img src="{{ asset('storage/categories/'.$category->image) }}" alt="Imagen de ejemplo" height="50" width="60" class="rounded" /></span></td>
+                                <td class="text-center"><span><img src="{{ asset('storage/categories/'.$category->imagen) }}" alt="Imagen de ejemplo" height="50" width="60" class="rounded" /></span></td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})" class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
                                     <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}','{{ $category->products->count() }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
@@ -67,6 +67,14 @@
         window.livewire.on('hidden.bs.modal', msg => {
             $('.err').css('display', 'none');
         });
+
+        window.livewire.on('error-delete', msg => {
+            Swal.fire({
+                icon: 'error',
+                title: '¡¡Aviso!!',
+                text: msg
+            })
+        });
     });
 
     function Confirm(id, products)
@@ -76,7 +84,7 @@
             Swal.fire({
                 icon: 'error',
                 title: '¡¡Aviso!!',
-                text: '¡No se puede eliminar la categoria porque tiene productos relacionados!'
+                text: '¡¡No se puede eliminar la categoria porque tiene productos relacionados!!'
             })
             return;
         }

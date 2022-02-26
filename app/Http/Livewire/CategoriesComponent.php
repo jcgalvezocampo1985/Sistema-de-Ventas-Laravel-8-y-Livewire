@@ -143,15 +143,23 @@ class CategoriesComponent extends Component
     public function Destroy(Category $category)
     {
         //$category = Category::find($id);
-        $imageName = $category->image;//Imagen temporal
-        $category->delete();
-
-        if($imageName != null)
+        if ($category->products->count() == 0)
         {
-            unlink('storage/categories/'.$imageName);
-        }
+            $imageName = $category->image;//Imagen temporal
+            $category->delete();
 
-        $this->resetUI();
-        $this->emit('category-deleted', 'Categoría eliminada');
+            if ($imageName != null)
+            {
+                unlink('storage/categories/'.$imageName);
+            }
+
+            $this->resetUI();
+            $this->emit('category-deleted', 'Categoría eliminada');
+        }
+        else
+        {
+            $this->resetUI();
+            $this->emit('error-delete', '¡¡No se puede eliminar la categoria porque tiene productos relacionados!!');
+        }
     }
 }
