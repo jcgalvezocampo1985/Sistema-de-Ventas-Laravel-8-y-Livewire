@@ -44,6 +44,28 @@
         .inblock{
             display: block;
         }
+
+    }
+
+    /*sidebar background*/
+    .sidebar-theme #compactSidebar {
+        background: #191e3a!important;
+    }
+
+    /*sidebar collapse bakcground*/
+    .header-container .sidebarCollapse{
+        color: #3b3f5c!important;
+    }
+
+    .navbar .navbar-item .nav-item form.form-inline input.search-form-control{
+        font-size: 15px;
+        background-color: #3b3f5c!important;
+        padding-right: 40px;
+        padding-top: 12px;
+        border: none;
+        color: #fff;
+        box-shadow: none;
+        border-radius: 30px;
     }
 </style>
 

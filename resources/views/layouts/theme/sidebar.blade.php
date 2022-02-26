@@ -141,9 +141,9 @@
             </li>
         </ul>
     </nav>
-    <!--<div id="compact_submenuSidebar" class="submenu-sidebar">
-        <div class="submenu" id="dashboard">
-            <ul class="submenu-list" data-parent-element="#dashboard"> 
+    <div id="compact_submenuSidebar">
+        <!--<div class="submenu" id="dashboard">
+            <ul class="submenu-list" data-parent-element="#dashboard">
                 <li>
                     <a href="index.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart">
@@ -164,6 +164,6 @@
                     </a>
                 </li>
             </ul>
-        </div>
-    </div>-->
+        </div>-->
+    </div>
 </div>
