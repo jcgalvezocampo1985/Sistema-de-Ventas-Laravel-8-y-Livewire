@@ -45,7 +45,7 @@
                                     <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
-                            @endforeach()
+                            @endforeach
                         </tbody>
                     </table>
                     {{ $data->links() }}
