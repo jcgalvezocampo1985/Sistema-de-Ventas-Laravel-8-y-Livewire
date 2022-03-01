@@ -22,7 +22,7 @@ class ProductsComponent extends Component
     public $stock;
     public $alerts;
     public $image;
-    public $category_id;
+    public $categoryid;
     public $selected_id;
     public $pageTitle;
     public $search;
@@ -39,6 +39,20 @@ class ProductsComponent extends Component
     public function paginationView()
     {
         return 'vendor.livewire.bootstrap';
+    }
+
+    public function resetUI()
+    {
+        $this->name = '';
+        $this->barcode = '';
+        $this->cost = '';
+        $this->price = '';
+        $this->stock = '';
+        $this->alerts = '';
+        $this->categoryid = null;
+        $this->image = null;
+        $this->search = '';
+        $this->selected_id = 0;
     }
 
     public function render()
@@ -62,5 +76,137 @@ class ProductsComponent extends Component
         return view('livewire.products.component', compact('data', 'categories'))
                 ->extends('layouts.theme.app')
                 ->section('content');
+    }
+
+    public function store()
+    {
+        $rules = [
+            'name' => 'required|unique:products|min:3',
+            'barcode' => 'required|numeric',
+            'cost' => 'required|numeric',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'alerts' => 'required|numeric',
+            'categoryid' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'Requerido',
+            'name.unique' => 'Ya existe el producto',
+            'name.min' => 'Debe contener mínimo 3 carácteres',
+            'barcode.required' => 'Requerido',
+            'barcode.numeric' => 'Solo números',
+            'cost.required' => 'Requerido',
+            'cost.numeric' => 'Solo números',
+            'price.required' => 'Requerido',
+            'price.numeric' => 'Solo números',
+            'stock.required' => 'Requerido',
+            'stock.numeric' => 'Solo números',
+            'alerts.required' => 'Requerido',
+            'alerts.numeric' => 'Solo números',
+            'categoryid.required' => 'Requerido'
+        ];
+
+        $this->validate($rules, $messages);
+
+        $category = Product::create([
+            'name' => $this->name,
+            'barcode' => $this->barcode,
+            'cost' => $this->cost,
+            'price' => $this->price,
+            'stock' => $this->stock,
+            'alerts' => $this->alerts,
+            'category_id' => $this->categoryid
+        ]);
+
+        if($this->image)
+        {
+            $customFileName = uniqid().'_.'.$this->image->extension();
+            $this->image->storeAs('public/products', $customFileName);
+            $category->image = $customFileName;
+            $category->save();
+        }
+
+        $this->resetUI();
+        $this->emit('product-added', 'Producto registrado');
+    }
+
+    public function edit(Product $product)
+    {
+        $this->selected_id = $product->id;
+        $this->name = $product->name;
+        $this->barcode = $product->barcode;
+        $this->cost = $product->cost;
+        $this->price = $product->price;
+        $this->stock = $product->stock;
+        $this->alerts = $product->alerts;
+        $this->categoryid = $product->category_id;
+        $this->image = null;
+
+        $this->emit('show-modal', 'show modal!');
+    }
+
+    public function update()
+    {
+        $rules = [
+            'name' => "required|min:3|unique:products,name,{$this->selected_id}",
+            'barcode' => 'required|numeric',
+            'cost' => 'required|numeric',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'alerts' => 'required|numeric',
+            'categoryid' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'Requerido',
+            'name.unique' => 'Ya existe el producto',
+            'name.min' => 'Debe contener mínimo 3 carácteres',
+            'barcode.required' => 'Requerido',
+            'barcode.numeric' => 'Solo números',
+            'cost.required' => 'Requerido',
+            'cost.numeric' => 'Solo números',
+            'price.required' => 'Requerido',
+            'price.numeric' => 'Solo números',
+            'stock.required' => 'Requerido',
+            'stock.numeric' => 'Solo números',
+            'alerts.required' => 'Requerido',
+            'alerts.numeric' => 'Solo números',
+            'categoryid.required' => 'Requerido'
+        ];
+
+        $this->validate($rules, $messages);
+
+        $product = Product::find($this->selected_id);
+        $product->update([
+            'name' => $this->name,
+            'barcode' => $this->barcode,
+            'cost' => $this->cost,
+            'price' => $this->price,
+            'stock' => $this->stock,
+            'alerts' => $this->alerts,
+            'category_id' => $this->categoryid
+        ]);
+
+        if($this->image)
+        {
+            $customFileName = uniqid().'_.'.$this->image->extension();
+            $this->image->storeAs('public/products', $customFileName);
+            $imageName = $product->image;
+
+            $product->image = $customFileName;
+            $product->save();
+
+            if($imageName != "")
+            {
+                if(file_exists('storage/products/'.$imageName))
+                {
+                    unlink('storage/products/'.$imageName);
+                }
+            }
+
+            $this->resetUI();
+            $this->emit('product-updated', 'Producto actualizado');
+        }
     }
 }

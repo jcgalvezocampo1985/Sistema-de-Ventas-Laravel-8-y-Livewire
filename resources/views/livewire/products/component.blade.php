@@ -41,7 +41,7 @@
                                 <td><h6>{{ $product->alerts }}</h6></td>
                                 <td class="text-center"><span><img src="{{ asset('storage/products/'.$product->imagen) }}" alt="Imagen de ejemplo" height="70" width="80"class="rounded" /></span></td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" wire:click="Edit({{ $product->category->id }})"class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" wire:click="edit({{ $product->category->id }})"class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
                                     <a href="javascript:void(0)" onclick="Confirm('{{ $product->category->id }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -77,16 +77,16 @@
         window.livewire.on('hidden.bs.modal', msg => {
             $('.er').css('display', 'none');
         });
-        window.livewire.on('error-delete', msg => {
+        /*window.livewire.on('error-delete', msg => {
             Swal.fire({
                 icon: 'error',
                 title: '¡¡Aviso!!',
                 text: msg
             })
-        });
+        });*/
     });
 
-    function Confirm(id, products)
+    /*function Confirm(id, products)
     {
         if(products > 0)
         {
@@ -112,5 +112,5 @@
                 swal.close();
             }
         })
-    }
+    }*/
 </script>

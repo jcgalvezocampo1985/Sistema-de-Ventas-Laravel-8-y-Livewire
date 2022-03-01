@@ -21,7 +21,7 @@ class CategoriesComponent extends Component
     public $selected_id;
     public $pageTitle;
     public $componentName;
-    private $pagination = 5;
+    private $pagination = 2;
 
     protected $listeners = [
         'deleteRow' => 'Destroy'
@@ -38,31 +38,29 @@ class CategoriesComponent extends Component
         return 'vendor.livewire.bootstrap';
     }
 
+    public function resetUI()
+    {
+        $this->name = '';
+        $this->image = null;
+        $this->search = '';
+        $this->selected_id = 0;
+    }
+
     public function render()
     {
-        $categories = Category::orderBy('id', 'DESC')->paginate($this->pagination);
+        $data = Category::orderBy('id', 'DESC')->paginate($this->pagination);
 
         if(strlen($this->search) > 0)
         {
-            $categories = Category::where('name', 'LIKE', '%'.$this->search.'%')->paginate($this->pagination);
+            $data = Category::where('name', 'LIKE', '%'.$this->search.'%')->paginate($this->pagination);
         }
 
-        return view('livewire.category.component', compact('categories'))
+        return view('livewire.category.component', compact('data'))
                 ->extends('layouts.theme.app')
                 ->section('content');
     }
 
-    public function Edit($id)
-    {
-        $record = Category::findOrFail($id, ['id','name', 'image']);
-        $this->name = $record->name;
-        $this->selected_id = $record->id;
-        $this->image = null;
-
-        $this->emit('show-modal', 'show modal!');
-    }
-
-    public function Store()
+    public function store()
     {
         $rules = [
             'name' => 'required|unique:categories|min:3'
@@ -80,7 +78,7 @@ class CategoriesComponent extends Component
             'name' => $this->name
         ]);
 
-        $customFileName = '';
+        $customFileName;
         if($this->image)
         {
             $customFileName = uniqid().'_.'.$this->image->extension();
@@ -93,7 +91,17 @@ class CategoriesComponent extends Component
         $this->emit('category-added', 'Categoría registrada');
     }
 
-    public function Update()
+    public function edit($id)
+    {
+        $record = Category::findOrFail($id, ['id','name', 'image']);
+        $this->name = $record->name;
+        $this->selected_id = $record->id;
+        $this->image = null;
+
+        $this->emit('show-modal', 'show modal!');
+    }
+
+    public function update()
     {
         $rules = [
             'name' => "required|min:3|unique:categories,name,{$this->selected_id}"
@@ -132,17 +140,8 @@ class CategoriesComponent extends Component
         }
     }
 
-    public function resetUI()
+    public function destroy(Category $category)
     {
-        $this->name = '';
-        $this->image = null;
-        $this->search = '';
-        $this->selected_id = 0;
-    }
-
-    public function Destroy(Category $category)
-    {
-        //$category = Category::find($id);
         if ($category->products->count() == 0)
         {
             $imageName = $category->image;//Imagen temporal

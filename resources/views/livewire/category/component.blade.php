@@ -7,7 +7,7 @@
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
-                        <a href="javascript:void(0)" class="tabmenu bd-dark" data-toggle="modal"
+                        <a href="javascript:void(0);" class="tabmenu bd-dark" data-toggle="modal"
                             data-target="#theModal">Agregar</a>
                     </li>
                 </ul>
@@ -24,21 +24,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $category)
+                            @foreach($data as $category)
                             <tr>
                                 <td>
                                     <h6>{{ $category->name }}</h6>
                                 </td>
                                 <td class="text-center"><span><img src="{{ asset('storage/categories/'.$category->imagen) }}" alt="Imagen de ejemplo" height="50" width="60" class="rounded" /></span></td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})" class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}','{{ $category->products->count() }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
+                                    <a href="javascript:void(0);" wire:click="edit({{ $category->id }})" class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0);" onclick="Confirm('{{ $category->id }}','{{ $category->products->count() }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $categories->links() }}
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>
@@ -67,7 +67,6 @@
         window.livewire.on('hidden.bs.modal', msg => {
             $('.er').css('display', 'none');
         });
-
         window.livewire.on('error-delete', msg => {
             Swal.fire({
                 icon: 'error',
