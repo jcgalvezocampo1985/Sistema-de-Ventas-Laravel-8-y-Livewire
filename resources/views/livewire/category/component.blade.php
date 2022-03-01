@@ -18,9 +18,9 @@
                     <table class="table table-bordered table-striped mt-1">
                         <thead class="text-white" style="background: #3b3f5c;">
                             <tr>
-                                <th class="table-th text-white">Descripción</th>
-                                <th class="table-th text-white">Imagen</th>
-                                <th class="table-th text-white">Acciones</th>
+                                <th class="table-th text-white text-center">Descripción</th>
+                                <th class="table-th text-white text-center">Imagen</th>
+                                <th class="table-th text-white text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

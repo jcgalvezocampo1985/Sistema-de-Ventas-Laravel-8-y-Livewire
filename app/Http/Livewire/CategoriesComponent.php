@@ -47,7 +47,7 @@ class CategoriesComponent extends Component
             $categories = Category::where('name', 'LIKE', '%'.$this->search.'%')->paginate($this->pagination);
         }
 
-        return view('livewire.category.categories', compact('categories'))
+        return view('livewire.category.component', compact('categories'))
                 ->extends('layouts.theme.app')
                 ->section('content');
     }
