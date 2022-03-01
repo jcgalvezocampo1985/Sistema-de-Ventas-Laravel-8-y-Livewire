@@ -29,6 +29,10 @@ class ProductsComponent extends Component
     public $componentName;
     private $pagination = 5;
 
+    protected $listeners = [
+        'deleteRow' => 'destroy'
+    ];
+
     public function mount()
     {
         $this->pageTitle = 'Listado';
@@ -49,7 +53,7 @@ class ProductsComponent extends Component
         $this->price = '';
         $this->stock = '';
         $this->alerts = '';
-        $this->categoryid = null;
+        $this->categoryid = '';
         $this->image = null;
         $this->search = '';
         $this->selected_id = 0;
@@ -207,6 +211,28 @@ class ProductsComponent extends Component
 
             $this->resetUI();
             $this->emit('product-updated', 'Producto actualizado');
+        }
+    }
+
+    public function destroy(Product $product)
+    {
+        if ($product->sale_details->count() == 0)
+        {
+            $imageName = $product->image;//Imagen temporal
+            $product->delete();
+
+            if ($imageName != null)
+            {
+                unlink('storage/products/'.$imageName);
+            }
+
+            $this->resetUI();
+            $this->emit('product-deleted', 'Producto eliminado');
+        }
+        else
+        {
+            $this->resetUI();
+            $this->emit('error-delete', '¡¡No se puede eliminar el producto porque tiene ventas relacionadas!!');
         }
     }
 }

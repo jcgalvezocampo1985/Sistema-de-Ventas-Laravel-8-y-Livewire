@@ -42,7 +42,7 @@
                                 <td class="text-center"><span><img src="{{ asset('storage/products/'.$product->imagen) }}" alt="Imagen de ejemplo" height="70" width="80"class="rounded" /></span></td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" wire:click="edit({{ $product->category->id }})"class="btn btn-dark mtmobile" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="javascript:void(0)" onclick="Confirm('{{ $product->category->id }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
+                                    <a href="javascript:void(0)" onclick="Confirm('{{ $product->category->id }}', '{{ $product->sale_details->count() }}')" class="btn btn-dark" title="Delete"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -77,23 +77,23 @@
         window.livewire.on('hidden.bs.modal', msg => {
             $('.er').css('display', 'none');
         });
-        /*window.livewire.on('error-delete', msg => {
+        window.livewire.on('error-delete', msg => {
             Swal.fire({
                 icon: 'error',
                 title: '¡¡Aviso!!',
                 text: msg
             })
-        });*/
+        });
     });
 
-    /*function Confirm(id, products)
+    function Confirm(id, sale_details)
     {
-        if(products > 0)
+        if(sale_details > 0)
         {
             Swal.fire({
                 icon: 'error',
                 title: '¡¡Aviso!!',
-                text: '¡¡No se puede eliminar la categoria porque tiene productos relacionados!!'
+                text: '¡¡No se puede eliminar el producto porque tiene ventas relacionados!!'
             })
             return;
         }
@@ -112,5 +112,5 @@
                 swal.close();
             }
         })
-    }*/
+    }
 </script>

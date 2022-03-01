@@ -24,7 +24,7 @@ class CategoriesComponent extends Component
     private $pagination = 2;
 
     protected $listeners = [
-        'deleteRow' => 'Destroy'
+        'deleteRow' => 'destroy'
     ];
 
     public function mount()
