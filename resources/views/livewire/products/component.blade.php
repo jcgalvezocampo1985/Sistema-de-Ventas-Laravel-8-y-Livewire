@@ -7,8 +7,7 @@
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
-                        <a href="javascript:void(0)" class="tabmenu bd-dark" data-toggle="modal"
-                            data-target="#theModal">Agregar</a>
+                        <a href="javascript:void(0)" class="tabmenu bd-dark" data-toggle="modal" data-target="#theModal">Agregar</a>
                     </li>
                 </ul>
             </div>
@@ -74,9 +73,10 @@
         window.livewire.on('show-modal', msg => {
             $('#theModal').modal('show');
         });
-        window.livewire.on('hidden.bs.modal', msg => {
+        $("#theModal").on('hidden.bs.modal', msg => {
             $('.er').css('display', 'none');
         });
+
         window.livewire.on('error-delete', msg => {
             Swal.fire({
                 icon: 'error',

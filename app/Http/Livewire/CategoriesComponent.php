@@ -134,10 +134,10 @@ class CategoriesComponent extends Component
                     unlink('storage/categories/'.$imageName);
                 }
             }
-
-            $this->resetUI();
-            $this->emit('category-updated', 'Categoría actualizada');
         }
+
+        $this->resetUI();
+        $this->emit('category-updated', 'Categoría actualizada');
     }
 
     public function destroy(Category $category)

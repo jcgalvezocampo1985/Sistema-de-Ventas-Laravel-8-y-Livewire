@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\CategoriesComponent;
 use App\Http\Livewire\ProductsComponent;
+use App\Http\Livewire\DenominationsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('categories', CategoriesComponent::class);
 Route::get('products', ProductsComponent::class);
+Route::get('denominations', DenominationsComponent::class);

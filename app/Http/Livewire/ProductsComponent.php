@@ -208,10 +208,10 @@ class ProductsComponent extends Component
                     unlink('storage/products/'.$imageName);
                 }
             }
-
-            $this->resetUI();
-            $this->emit('product-updated', 'Producto actualizado');
         }
+
+        $this->resetUI();
+        $this->emit('product-updated', 'Producto actualizado');
     }
 
     public function destroy(Product $product)
