@@ -3,6 +3,9 @@
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('plugins/sweetalerts/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('plugins/nicescroll/nicescroll.js') }}"></script>
+<script src="{{ asset('plugins/notification/snackbar/snackbar.min.js') }}"></script>
+<script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
 <script>
 $(document).ready(function() {
@@ -15,7 +18,7 @@ $(document).ready(function() {
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
 <script>
-    function noti(msg, option = 1)
+    function noty(msg, option = 1)
     {
         Snackbar.show({
             text: msg.toUpperCase(),

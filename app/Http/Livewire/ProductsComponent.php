@@ -47,6 +47,7 @@ class ProductsComponent extends Component
 
     public function resetUI()
     {
+        $this->resetValidation();
         $this->name = '';
         $this->barcode = '';
         $this->cost = '';
@@ -67,14 +68,15 @@ class ProductsComponent extends Component
         if(strlen($this->search) > 0)
         {
             $data = Product::whereHas('category', function($q){
-                        return $q->where('products.name', 'LIKE', '%'.$this->search.'%')
-                                 ->orWhere('products.barcode', 'LIKE', '%'.$this->search.'%')
-                                 ->orWhere('products.cost', 'LIKE', '%'.$this->search.'%')
-                                 ->orWhere('products.price', 'LIKE', '%'.$this->search.'%')
-                                 ->orWhere('products.stock', 'LIKE', '%'.$this->search.'%')
-                                 ->orWhere('products.alerts', 'LIKE', '%'.$this->search.'%')
-                                 ->orWhere('categories.name', 'LIKE', '%'.$this->search.'%');
-            })->paginate($this->pagination);
+                        return $q->where('categories.name', 'LIKE', '%'.$this->search.'%');
+                    })
+                    ->orWhere('name', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('barcode', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('cost', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('price', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('stock', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('alerts', 'LIKE', '%'.$this->search.'%')
+                    ->paginate($this->pagination);
         }
 
         return view('livewire.products.component', compact('data', 'categories'))
@@ -132,7 +134,7 @@ class ProductsComponent extends Component
         }
 
         $this->resetUI();
-        $this->emit('product-added', 'Producto registrado');
+        $this->emit('item-added', 'Producto registrado');
     }
 
     public function edit(Product $product)
@@ -211,7 +213,7 @@ class ProductsComponent extends Component
         }
 
         $this->resetUI();
-        $this->emit('product-updated', 'Producto actualizado');
+        $this->emit('item-updated', 'Producto actualizado');
     }
 
     public function destroy(Product $product)
@@ -227,7 +229,7 @@ class ProductsComponent extends Component
             }
 
             $this->resetUI();
-            $this->emit('product-deleted', 'Producto eliminado');
+            $this->emit('item-deleted', 'Producto eliminado');
         }
         else
         {

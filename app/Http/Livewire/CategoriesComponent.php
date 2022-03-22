@@ -21,7 +21,7 @@ class CategoriesComponent extends Component
     public $selected_id;
     public $pageTitle;
     public $componentName;
-    private $pagination = 2;
+    private $pagination = 5;
 
     protected $listeners = [
         'deleteRow' => 'destroy'
@@ -88,7 +88,7 @@ class CategoriesComponent extends Component
         }
 
         $this->resetUI();
-        $this->emit('category-added', 'Categoría registrada');
+        $this->emit('item-added', 'Categoría registrada');
     }
 
     public function edit($id)
@@ -137,7 +137,7 @@ class CategoriesComponent extends Component
         }
 
         $this->resetUI();
-        $this->emit('category-updated', 'Categoría actualizada');
+        $this->emit('item-updated', 'Categoría actualizada');
     }
 
     public function destroy(Category $category)
@@ -153,7 +153,7 @@ class CategoriesComponent extends Component
             }
 
             $this->resetUI();
-            $this->emit('category-deleted', 'Categoría eliminada');
+            $this->emit('item-deleted', 'Categoría eliminada');
         }
         else
         {

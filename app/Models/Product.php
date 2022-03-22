@@ -19,7 +19,7 @@ class Product extends Model
 
     public function sale_details()
     {
-        return $this->hasMany(SaleDetail::class);
+        return $this->hasMany(SaleDetail::class, 'product_id');
     }
 
     public function getImagenAttribute()

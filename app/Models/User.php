@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use App\Models\Sale;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,10 +24,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'profile',
         'phone',
         'status',
-        'image'
+        'image',
+        'role_id'
     ];
 
     /**
@@ -45,4 +48,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getImagenAttribute()
+    {
+        if(file_exists('storage/users/'.$this->image) && $this->image != "")
+        {
+            return $this->image;
+        }
+        else
+        {
+            return 'noimg.jpg';
+        }
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'user_id');
+    }
 }

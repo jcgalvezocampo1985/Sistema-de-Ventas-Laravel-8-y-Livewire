@@ -36,7 +36,7 @@
             <!--  BEGIN CONTENT AREA  -->
             <div id="content" class="main-content">
                 <div class="layout-px-spacing">
-                    @yield('content');
+                    @yield('content')
                 </div>
             </div>
             <!--  END CONTENT AREA  -->

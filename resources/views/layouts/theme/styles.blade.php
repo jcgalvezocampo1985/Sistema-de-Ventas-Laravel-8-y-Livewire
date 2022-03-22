@@ -8,16 +8,15 @@
 
 <link href="{{ asset('plugins/font-icons/fontawesome/css/all.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('plugins/font-icons/fontawesome/css/fontawesome.css') }}" rel="stylesheet" type="text/css">
-
 <link href="{{ asset('assets/css/elements/avatar.css') }}" rel="stylesheet" type="text/css">
-
 <link href="{{ asset('plugins/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('plugins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet" type="text/css">
-
 <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
-
 <link href="{{ asset('assets/css/widgets/modules-widgets.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('assets/css/apps/scrumboard.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('assets/css/apps/notes.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('plugins/flatpickr/flatpickr.dark.css') }}" rel="stylesheet" type="text/css">
 
 <style>
     aside{
@@ -64,6 +63,9 @@
         color: #fff;
         box-shadow: none;
         border-radius: 30px;
+    }
+    .modal-backdrop {
+        background-color: #000;
     }
 </style>
 
